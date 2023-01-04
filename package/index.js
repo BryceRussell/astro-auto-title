@@ -33,6 +33,7 @@ export function autoTitle (
         else text = _options.defaultText(tree, file)
       }
 
+      // define heading Node to inject
       const heading = {
         type: 'heading',
         depth: 1,
@@ -69,15 +70,17 @@ export function autoTitle (
       }
 
       if (node) {
+        // If h1 is in file check if empty, if so replace it, else just try to add its text as a frontmatter variable
         const _text = toString(node)
         if (!_text && text) node = heading
-        else if (text) addToFrontmatter(_text)
+        else if (_text) addToFrontmatter(_text)
       }
       else {
         // If no h1 found in file add one and try to add its text as a frontmatter property
-        const _text = toString(heading)
-        if (text) tree.children.unshift(heading)
-        if (text && _text) addToFrontmatter(_text)
+        if (text) {
+          tree.children.unshift(heading)
+          addToFrontmatter(toString(heading))
+        }
       }
       
       return

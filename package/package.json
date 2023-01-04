@@ -1,6 +1,6 @@
 {
   "name": "astro-auto-title",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Automatically adds title frontmatter as an h1 heading, or vice versa",
   "author": "Bryce Russell",
   "license": "MIT",
