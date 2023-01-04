@@ -5,7 +5,9 @@ import { autoTitle } from 'astro-auto-title';
 export default defineConfig({
     markdown: { 
         remarkPlugins: [
-            [autoTitle, {}]
+            [autoTitle, {
+
+            }]
         ]
     }
 });

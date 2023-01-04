@@ -8,7 +8,7 @@ A [Remark](https://github.com/remarkjs/remark) plugin for [Astro](https://docs.a
 
 - Automatically add `<h1>` heading using frontmatter variable
 - Copy the text of `<h1>` to the frontmatter as a variable
-- Create dyanmic default titles using the documents `mdast` and `vfile`
+- Create dynamic default titles using the documents `mdast` and `vfile`
 - Option to force only one `<h1>` per document by removing any extras
 - Option to shift extra `<h1>` headings to a lower depth
 - Option to override frontmatter variables defined in file
@@ -66,7 +66,7 @@ This is a description
 ```
 // 3
 ---
-title: I dont override h1
+title: I dont override existing h1
 ---
 # H1 Heading
 
@@ -75,7 +75,7 @@ This is a description
 
 **Are rendered into this HTML**:
 
-```
+```html
 <h1>H1 Heading</h1>
 <p>This is a description</p>
 ```
@@ -129,7 +129,7 @@ title: H1 Heading
 This is a description
 ```
 
-```
+```html
 <h1>H1 Heading</h1>
 <p>This is a description</p>
 ```
@@ -156,7 +156,7 @@ If `false` is passed no variable is added to frontmatter
 This is a description
 ```
 
-```
+```js
 frontmatter = {
     title: 'Heading defined in file'
 }

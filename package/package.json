@@ -1,15 +1,20 @@
 {
   "name": "astro-auto-title",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Automatically adds title frontmatter as an h1 heading, or vice versa",
+  "author": "Bryce Russell",
+  "license": "MIT",
   "keywords": [
     "astro",
     "remark",
     "auto",
     "title"
   ],
-  "author": "Bryce Russell",
-  "license": "MIT",
+  "dependencies": {
+    "mdast-util-to-string": "^3.1.0",
+    "unist-util-remove": "^3.1.0",
+    "unist-util-visit": "^4.1.1"
+  },
   "type": "module",
   "main": "index.js",
   "types": "./index.d.ts"

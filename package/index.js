@@ -26,22 +26,23 @@ export function autoTitle (
       }
 
 
-      // Define heading to inject and calculate its text
-      const heading = {
-          type: 'heading',
-          depth: 1,
-          children: [
-              { 
-                type: 'text',
-                value:
-                  frontmatter[_options.frontmatterToH1]
-                  || ( typeof _options.defaultText === 'string'
-                    ? _options.defaultText
-                    : _options.defaultText(tree, file)
-                  )
-              }
-          ]
+      // calculate what text the injected heading should have
+      let text = frontmatter[_options.frontmatterToH1] || undefined;
+      if (!text && _options.defaultText !== false) {
+        if ( typeof _options.defaultText === 'string') text = _options.defaultText
+        else text = _options.defaultText(tree, file)
       }
+
+      const heading = {
+        type: 'heading',
+        depth: 1,
+        children: [
+            { 
+              type: 'text',
+              value: text
+            }
+        ]
+    }
 
       // Walk tree, find first h1 to assign to 'node', all other h1s get removed or shifted downwards in depth
       var node;
@@ -59,22 +60,24 @@ export function autoTitle (
       })
 
       function addToFrontmatter(text) {
-        // Add frontmatter property if not defined
         if (_options.h1ToFrontmatter) {
+          // override frontmatter
           if (options.override) frontmatter[_options.h1ToFrontmatter] = text
+          // Add frontmatter property if not defined
           else if (!frontmatter[_options.h1ToFrontmatter]) frontmatter[_options.h1ToFrontmatter] = text
         }
       }
 
       if (node) {
-        const text = toString(node)
-        if (!text) node = heading
-        else addToFrontmatter(text)
+        const _text = toString(node)
+        if (!_text && text) node = heading
+        else if (text) addToFrontmatter(_text)
       }
       else {
         // If no h1 found in file add one and try to add its text as a frontmatter property
-        tree.children.unshift(heading)
-        addToFrontmatter(toString(heading))
+        const _text = toString(heading)
+        if (text) tree.children.unshift(heading)
+        if (text && _text) addToFrontmatter(_text)
       }
       
       return
