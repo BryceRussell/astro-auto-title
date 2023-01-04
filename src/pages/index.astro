@@ -1,0 +1,32 @@
+---
+const posts = await Astro.glob('/src/pages/content/*.md')
+---
+
+
+<html>
+	<head>
+
+	</head>
+	<body>
+		{ posts.map((post) => {
+			return <>
+				<article>
+					<Fragment set:html={post.compiledContent()}/>
+					<pre>
+						{JSON.stringify(post.frontmatter)}
+					</pre>
+				</article>
+			</>
+		})}
+	</body>
+</html>
+
+<style>
+	article {
+		width: fit-content;
+	}
+
+	pre {
+		text-align: left;
+	}
+</style>
