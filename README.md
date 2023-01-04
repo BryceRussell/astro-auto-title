@@ -182,7 +182,7 @@ frontmatter = {
 
 Can be a static string or a function that calculates a default string using the documents `mdast` tree and `vfile`
 
-Pass `false` to disable adding a `<h1>` by default if none if found or there is no frontmatter variable to create one from
+Pass `false` to disable adding `<h1>` by default (will still create `<h1>` from frontmatter variable if available)
 
 
 ### `override?: boolean`
